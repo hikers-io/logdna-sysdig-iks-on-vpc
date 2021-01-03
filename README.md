@@ -37,7 +37,9 @@ Variable | Type | Description | Default
 `ibmcloud_api_key` | String | The IBM Cloud platform API key needed to deploy IAM enabled resources |
 `generation` | String | Generation of VPC. Can be 1 or 2 | `2`
 `ibm_region` | String | IBM Cloud region where all resources will be deployed |
-`resource_group` | String | Name for IBM Cloud Resource Group where resources will be deployed | 
+`cluster_resource_group` | String | Name for IBM Cloud Resource Group where the cluster was deployed |
+`logging_resource_group` | String | Name for IBM Cloud Resource Group where logging resources was or will be deployed |
+`monitoring_resource_group` | String | Name for IBM Cloud Resource Group where monitoring resources was or will be deployed |
 `cluster_name` | String | Name of the cluster where resources will be deployed | 
 `bring_your_own_logging` | String | True or false. A logging instance will be created if `false` | `false`
 `logging_instance_name` | String | Name of logging instance. Name of the instance to be created if not bringing your own instance, otherwise use the name of your existing instance | `cluster-logging`

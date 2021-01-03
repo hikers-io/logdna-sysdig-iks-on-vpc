@@ -16,8 +16,16 @@ provider ibm {
 # Resource Group
 ##############################################################################
 
-data ibm_resource_group group {
-  name = var.resource_group
+data ibm_resource_group cluster_resource_group {
+  name = var.cluster_resource_group
+}
+
+data ibm_resource_group logging_resource_group {
+  name = var.logging_resource_group
+}
+
+data ibm_resource_group monitoring_resource_group {
+  name = var.monitoring_resource_group
 }
 
 ##############################################################################
@@ -29,7 +37,7 @@ data ibm_resource_group group {
 
 data ibm_container_cluster_config cluster {
   cluster_name_id   = var.cluster_name
-  resource_group_id = data.ibm_resource_group.group.id
+  resource_group_id = data.ibm_resource_group.cluster_resource_group.id
   admin             = true
 }
 
@@ -62,7 +70,7 @@ resource ibm_resource_instance activity_tracker {
   service           = "logdnaat"
   plan              = var.logging_plan
   location          = var.ibm_region
-  resource_group_id = data.ibm_resource_group.group.id
+  resource_group_id = data.ibm_resource_group.logging_resource_group.id
 
   parameters = {
     service-endpoints = var.logging_endpoint
@@ -79,7 +87,7 @@ resource ibm_resource_instance activity_tracker {
 
 module logging {
     source             = "./logging"
-    resource_group_id  = data.ibm_resource_group.group.id
+    resource_group_id  = data.ibm_resource_group.logging_resource_group.id
     use_data           = var.bring_your_own_logging
     ibm_region         = var.ibm_region
     name               = var.logging_instance_name
@@ -99,7 +107,7 @@ module logging {
 
 module monitor {
     source             = "./monitoring"
-    resource_group_id  = data.ibm_resource_group.group.id
+    resource_group_id  = data.ibm_resource_group.monitoring_resource_group.id
     use_data           = var.bring_your_own_monitor
     ibm_region         = var.ibm_region
     name               = var.monitor_name

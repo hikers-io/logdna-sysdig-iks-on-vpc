@@ -17,8 +17,18 @@ variable generation {
     default     = 2
 }
 
-variable resource_group {
-    description = "Name for IBM Cloud Resource Group where resources will be deployed"
+variable cluster_resource_group {
+    description = "Name for IBM Cloud Resource Group where the cluster was deployed"
+    type        = string
+}
+
+variable logging_resource_group {
+    description = "Name for IBM Cloud Resource Group where logging resources was or will be deployed"
+    type        = string
+}
+
+variable monitoring_resource_group {
+    description = "Name for IBM Cloud Resource Group where monitoring resources was or will be deployed"
     type        = string
 }
 
