@@ -40,6 +40,7 @@ Variable | Type | Description | Default
 `cluster_resource_group` | String | Name for IBM Cloud Resource Group where the cluster was deployed |
 `logging_resource_group` | String | Name for IBM Cloud Resource Group where logging resources was or will be deployed |
 `monitoring_resource_group` | String | Name for IBM Cloud Resource Group where monitoring resources was or will be deployed |
+`provision_activity_tracker` | String | Provision activity tracker. Only one instance of Activity Tracker can be created in a region. Can be `true` or `false` |
 `cluster_name` | String | Name of the cluster where resources will be deployed | 
 `bring_your_own_logging` | String | True or false. A logging instance will be created if `false` | `false`
 `logging_instance_name` | String | Name of logging instance. Name of the instance to be created if not bringing your own instance, otherwise use the name of your existing instance | `cluster-logging`
