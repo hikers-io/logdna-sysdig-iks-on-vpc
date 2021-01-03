@@ -51,6 +51,7 @@ Variable | Type | Description | Default
 `monitor_plan` | String | Only required when creating resource. Plan for logging instance. | `graduated-tier`
 `tags` | String | (Optional) List of tags for resource creation | `[]`
 `service_end_points` | String | Sets the endpoints for the resources if not bringing your own. Can be `public` or `private` | `private`
+`provision_activity_tracker` | String | Provision activity tracker. Only one instance of Activity Tracker can be created in a region. Can be `true` or `false` | `false`
 ---
 ## Outputs
 
