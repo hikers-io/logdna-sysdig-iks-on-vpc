@@ -114,7 +114,7 @@ resource kubernetes_cluster_role_binding sysdig_agent {
     name      = "sysdig-agent"
   }
 
-  depends_on = ["kubernetes_cluster_role.sysdig_agent"]
+  depends_on = [kubernetes_cluster_role.sysdig_agent]
 }
 
 ##############################################################################
