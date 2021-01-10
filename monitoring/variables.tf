@@ -28,6 +28,15 @@ variable cluster_name {
   description = "Name of cluster where sysdig agents will be installed"
 }
 
+variable create_k8s_namespace {
+  description = "Create namespace on the cluster where sysdig agents will be installed"
+}
+
+variable k8s_agent_namespace {
+  description = "Namespace on the cluster where sysdig agents will be installed"
+  default = "ibm-observe"
+}
+
 variable sysdig_endpoint {
   description = "API endpoint prefix for Sysdig (private, public, direct)"
   default     = "private" 

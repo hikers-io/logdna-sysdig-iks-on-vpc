@@ -37,7 +37,7 @@ resource ibm_resource_key sysdig_secret {
 resource kubernetes_service_account sysdig_agent {
   metadata {
     name      = "sysdig-agent"
-    namespace = "ibm-observe"
+    namespace = var.k8s_agent_namespace
   }
   depends_on = [kubernetes_secret.copy_image_pull_secret, ibm_resource_key.sysdig_secret]
 }
@@ -106,7 +106,7 @@ resource kubernetes_cluster_role_binding sysdig_agent {
   subject {
     kind      = "ServiceAccount"
     name      = "sysdig-agent"
-    namespace = "ibm-observe"
+    namespace = var.k8s_agent_namespace
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
@@ -127,7 +127,7 @@ resource kubernetes_cluster_role_binding sysdig_agent {
 resource kubernetes_secret sysdig_agent {
   metadata {
     name      = "sysdig-agent"
-    namespace = "ibm-observe"
+    namespace = var.k8s_agent_namespace
   }
   data = {
     access-key = ibm_resource_key.sysdig_secret.credentials["Sysdig Access Key"]
@@ -147,7 +147,7 @@ resource kubernetes_secret sysdig_agent {
 resource kubernetes_config_map sysdig_config_map {
   metadata {
     name      = "sysdig-agent"
-    namespace = "ibm-observe"
+    namespace = var.k8s_agent_namespace
     labels = {
       app = kubernetes_secret.sysdig_agent.metadata.0.name
     }
@@ -178,7 +178,7 @@ resource kubernetes_config_map sysdig_config_map {
 resource kubernetes_daemonset sysdig_agent {
   metadata {
     name      = "sysdig-agent"
-    namespace = "ibm-observe"
+    namespace = var.k8s_agent_namespace
     labels = {
       app = "sysdig-agent"
     }
@@ -196,6 +196,7 @@ resource kubernetes_daemonset sysdig_agent {
         }
       }
       spec {
+        service_account_name = kubernetes_service_account.sysdig_agent.metadata.0.name
         image_pull_secrets {
           name = "ibm-observe-icr-io"
         }

@@ -15,8 +15,7 @@ locals {
 # Create Namespace
 ##############################################################################
 
-resource kubernetes_namespace k8s_agent_namespace {
-  count = var.create_k8s_namespace ? 1: 0
+resource kubernetes_namespace ibm_observe {
   metadata {
     name = var.k8s_agent_namespace
   }
@@ -30,7 +29,7 @@ resource kubernetes_namespace k8s_agent_namespace {
 ##############################################################################
 
 data kubernetes_secret image_pull_secret {
-  count = var.create_k8s_namespace ? length(local.image_pull_secrets) : 0
+  count = length(local.image_pull_secrets)
   metadata {
     name = element(local.image_pull_secrets, count.index)
   }
@@ -44,10 +43,10 @@ data kubernetes_secret image_pull_secret {
 ##############################################################################
 
 resource kubernetes_secret copy_image_pull_secret {
-  count = var.create_k8s_namespace ? length(local.image_pull_secrets) : 0
+  count = length(local.image_pull_secrets)
   metadata {
     name      = "ibm-observe-${element(local.image_pull_secrets, count.index)}"
-    namespace = kubernetes_namespace.k8s_agent_namespace.0.metadata.0.name
+    namespace = kubernetes_namespace.ibm_observe.metadata.0.name
   }
   data      = {
     ".dockerconfigjson" = data.kubernetes_secret.image_pull_secret[count.index].data[".dockerconfigjson"]

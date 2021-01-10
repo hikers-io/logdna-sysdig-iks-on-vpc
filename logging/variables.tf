@@ -14,6 +14,11 @@ variable resource_group_id {
     description =  "ID of resource groupr for logdna instance"
 }
 
+variable k8s_agent_namespace {
+  description = "Namespace on the cluster where sysdig agents will be installed"
+  default = "ibm-observe"
+}
+
 variable use_data {
     description = "Use data block for logdna instance"
     default     = true

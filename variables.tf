@@ -17,6 +17,16 @@ variable cluster_name {
     type        = string
 }
 
+variable k8s_logging_agent_namespace {
+  description = "Namespace on the cluster where logdna agents will be installed"
+  default = "ibm-observe"
+}
+
+variable k8s_monitoring_agent_namespace {
+  description = "Namespace on the cluster where sysdig agents will be installed"
+  default = "ibm-observe"
+}
+
 ##############################################################################
 
 

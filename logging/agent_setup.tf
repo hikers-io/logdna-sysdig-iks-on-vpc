@@ -37,6 +37,7 @@ resource ibm_resource_key logdna_secret {
 resource kubernetes_secret logdna_agent_key {
   metadata {
     name      = "logdna-agent-key"
+    namespace = var.k8s_agent_namespace
   }
   data = {
     logdna-agent-key = ibm_resource_key.logdna_secret.credentials["ingestion_key"]
@@ -55,6 +56,7 @@ resource kubernetes_secret logdna_agent_key {
 resource kubernetes_daemonset logdna_agent {
   metadata {
     name = "logdna-agent"
+    namespace = var.k8s_agent_namespace
   }
   spec {
     selector {
